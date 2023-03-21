@@ -1,4 +1,4 @@
-package com.generation.farmacia.model;
+package com.generation.loja.model;
 
 import java.util.List;
 
@@ -10,20 +10,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "tb_categorias")
+@Table(name = "tb_categoria")
 public class Categoria {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
-	@Size(min = 2, max = 30, message = "O atributo nomeCategoria não pode ter menos que 2 e mais que 30 caracteres.")
+	@NotNull (message = "O Atributo nomeCategoria é obrigatório")
 	private String nomeCategoria;
 	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
@@ -53,6 +51,5 @@ public class Categoria {
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
-	
 	
 }

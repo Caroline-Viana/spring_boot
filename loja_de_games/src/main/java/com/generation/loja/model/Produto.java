@@ -1,4 +1,4 @@
-package com.generation.farmacia.model;
+package com.generation.loja.model;
 
 import java.math.BigDecimal;
 
@@ -15,24 +15,25 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "tb_produto")
+@Table(name = "tb_produtos")
 public class Produto {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "O atributo nome é obrigatorio!")
-	@Size(min = 5, max = 100, message = "O atributo nome não pode ter menos de 5 e mais de 100 caracteres")
+	@NotBlank(message = "O atributo nome é obrigatório!")
+	@Size(min = 3, max = 100, message = "O atributo nome não pode ter menos de 3 e mais de 100 caracteres.")
 	private String nome;
 	
-	@Positive(message = "O preço do produto deve ser positivo")
+	@Positive(message = "O preço deve ser positivo!")
 	private BigDecimal preco;
 	
-	private String volume;
-	
-	@Size(min = 5, max = 1000, message = "O atributo descrição não pode ter menos de 5 e mais de 1000 caracteres")
+	@Size(max = 1000, message = "O atributo destrição não pode ter mais que 1000 caracteres.")
 	private String descricao;
+	
+	@NotBlank(message = "O atributo foto é obrigatório!")
+	private String foto;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
@@ -62,20 +63,20 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public String getVolume() {
-		return volume;
-	}
-
-	public void setVolume(String volume) {
-		this.volume = volume;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public Categoria getCategoria() {
@@ -85,6 +86,5 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
-	
+
 }
